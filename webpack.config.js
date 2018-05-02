@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 module.exports = {
+    devtool:'inline-source-map',
     entry: [
         "webpack-dev-server/client?http://0.0.0.0:3000",
         "webpack/hot/only-dev-server",
@@ -41,13 +42,13 @@ module.exports = {
                 loader: "sass-loader"
             }]
         }, {
-            test: /\.scss$/,
+            test: /\.less$/,
             use: [{
                 loader: "style-loader"
             }, {
                 loader: "css-loader"
             }, {
-                loader: "sass-loader"
+                loader: "less-loader"
             }]
         }, {
             test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
