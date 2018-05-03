@@ -52,8 +52,10 @@ class loginForm extends Component{
                                                 placeholder="请输入密码"
                                                 type="password"
                                             />)}
-                                            <Button type="primary" htmlType="submit">登录</Button>
-                                            <Link to="/register">注册</Link>
+                                        </FormItem>
+                                        <FormItem hasFeedback>
+                                        <Button type="primary" htmlType="submit">登录</Button>
+                                        <Link to="/register">注册</Link>
                                         </FormItem>
                                     </Form>
                                 </Spin>
