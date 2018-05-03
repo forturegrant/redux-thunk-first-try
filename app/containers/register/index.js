@@ -6,13 +6,24 @@ const FormItem = Form.Item
 
 
 
-class loginForm extends Component{
+
+
+class registerForm extends Component{
     constructor(props){
         super(props);
         this.state = {
             loading: false
         }
     }
+
+    /*handleChange = (e) =>{
+
+    }*/
+
+    handleSubmit(e){
+        e.preventDefault();
+    }
+
     render(){
         const { getFieldDecorator } =this.props.form;
         return(
@@ -21,11 +32,11 @@ class loginForm extends Component{
                 </div>
                 <div className="btmLogin">
                     <div className="sy_bottom">
-                        <h1 id="PerformName">登录</h1>
+                        <h1 id="PerformName">注册</h1>
                         <Row className="ul-wrap">
                             <Col span={24}>
                                 <Spin spinning={this.state.loading}>
-                                    <Form>
+                                    <Form onSubmit={this.handleSubmit}>
                                         <FormItem hasFeedback>
                                             {getFieldDecorator('username', {
                                                 rules: [
@@ -52,8 +63,25 @@ class loginForm extends Component{
                                                 placeholder="请输入密码"
                                                 type="password"
                                             />)}
-                                            <Button type="primary" htmlType="submit">登录</Button>
-                                            <Link to="/register">注册</Link>
+                                        </FormItem>
+                                        <FormItem hasFeedback>
+                                            {getFieldDecorator('confirm', {
+                                                rules: [
+                                                    { required: true, message: '请输入密码' },
+                                                    // { pattern: regExpConfig.pwd, message: '密码只能是6-16个数字或者字母组成' }
+                                                    { validator: this.checkPassword },
+                                                ],
+                                                // validateTrigger: 'onBlur',
+
+                                            })(<Input
+                                                prefix={<Icon type="lock" style={{ fontSize: 13 }} />}
+                                                placeholder="请再次输入密码"
+                                                type="password"
+                                            />,)}
+                                        </FormItem>
+                                        <FormItem hasFeedback>
+                                        <Button type="primary" htmlType="submit">确定注册</Button>
+                                        <Link to="/login">登录</Link>
                                         </FormItem>
                                     </Form>
                                 </Spin>
@@ -66,12 +94,12 @@ class loginForm extends Component{
     }
 }
 
-const login = Form.create({
+const register = Form.create({
     onFieldsChange(props, items) {
         // console.log(items)
         // props.cacheSearch(items);
     }
-})(loginForm);
+})(registerForm);
 
 
-export default login
+export default register
