@@ -35,3 +35,5 @@ ajax无法实现前进后退
 router4 各种坑
 
 写箭头函数会报错
+
+弄清各种数组遍历api，map，reduce等

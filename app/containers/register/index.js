@@ -1,7 +1,13 @@
 import React,{ Component } from 'react'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Form , Row ,Col, Spin, Input ,Icon , Button} from 'antd'
+import {bindActionCreators} from 'redux'
+/*import {dispatch} from ''*/
 
+//import {register as registera} from '../../reducers/register.js'
+
+const registera = { type : 'register' }
 const FormItem = Form.Item
 
 
@@ -11,9 +17,7 @@ const FormItem = Form.Item
 class registerForm extends Component{
     constructor(props){
         super(props);
-        this.state = {
-            loading: false
-        }
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     /*handleChange = (e) =>{
@@ -22,6 +26,35 @@ class registerForm extends Component{
 
     handleSubmit(e){
         e.preventDefault();
+        this.props.form.validateFields((err, values) => {
+            if (!err) {
+                // this.state.loading = true
+                // this.setState({loading: true})
+                /*Object.keys(values).map(key => {
+                    //console.log(key);
+                    values[key] = (values[key] && values[key].trim())
+                })*/
+                /*this.props.dispatch(fetchRegister(values, (res) => {
+                    // console.log(res)
+                    message.success(res.msg)
+                    if (res.status === 1) {
+                        const query  = this.props.form.getFieldsValue()
+                        global.gconfig.staff = res.data.user
+                        // hashHistory.push('/')
+                    }
+                }, (res) => {
+                    message.warning(res.msg)
+                    this.setState({
+                        loading: false,
+                    })
+                }))*/
+
+                this.props.registerR;
+                // sessionStorage.setItem('token', 'dupi')
+                // sessionStorage.setItem('username', values.username)
+                // hashHistory.push('/')
+            }
+        })
     }
 
     render(){
@@ -35,7 +68,7 @@ class registerForm extends Component{
                         <h1 id="PerformName">注册</h1>
                         <Row className="ul-wrap">
                             <Col span={24}>
-                                <Spin spinning={this.state.loading}>
+                                <Spin spinning={this.props.loading}>
                                     <Form onSubmit={this.handleSubmit}>
                                         <FormItem hasFeedback>
                                             {getFieldDecorator('username', {
@@ -101,5 +134,15 @@ const register = Form.create({
     }
 })(registerForm);
 
+const mapStateToProps = (state) =>({
+    loading:state.loading
+})
 
-export default register
+const mapDispatchToProps = (dispatch) =>{
+    registerR : bindActionCreators(registera,dispatch)
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(register)
