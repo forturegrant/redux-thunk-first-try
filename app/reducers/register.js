@@ -2,11 +2,11 @@ const initialState = {
      loading : false
 }
 
-/*export const register = text => {
+export function register(text){
     return {
-        type:"register"
+        type: 'register'
     }
-}*/
+}
 
 export function registerR (state = initialState, action) {
     switch (action.type){

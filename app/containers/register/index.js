@@ -3,11 +3,10 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Form , Row ,Col, Spin, Input ,Icon , Button} from 'antd'
 import {bindActionCreators} from 'redux'
-/*import {dispatch} from ''*/
 
-//import {register as registera} from '../../reducers/register.js'
+import {register as registera} from '../../reducers/register.js'
 
-const registera = { type : 'register' }
+//const registera = { type : 'register' }
 const FormItem = Form.Item
 
 
@@ -28,12 +27,7 @@ class registerForm extends Component{
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                // this.state.loading = true
-                // this.setState({loading: true})
-                /*Object.keys(values).map(key => {
-                    //console.log(key);
-                    values[key] = (values[key] && values[key].trim())
-                })*/
+                this.props.registerR();
                 /*this.props.dispatch(fetchRegister(values, (res) => {
                     // console.log(res)
                     message.success(res.msg)
@@ -48,13 +42,12 @@ class registerForm extends Component{
                         loading: false,
                     })
                 }))*/
-
-                this.props.registerR;
                 // sessionStorage.setItem('token', 'dupi')
                 // sessionStorage.setItem('username', values.username)
                 // hashHistory.push('/')
             }
         })
+
     }
 
     render(){
@@ -138,9 +131,11 @@ const mapStateToProps = (state) =>({
     loading:state.loading
 })
 
-const mapDispatchToProps = (dispatch) =>{
-    registerR : bindActionCreators(registera,dispatch)
-}
+const mapDispatchToProps = (dispatch) =>({
+    registerR: () => dispatch({
+        type:'register'
+    })
+})
 
 export default connect(
     mapStateToProps,
