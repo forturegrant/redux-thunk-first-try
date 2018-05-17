@@ -41,13 +41,13 @@ module.exports = {
                 loader: "sass-loader"
             }]
         }, {
-            test: /\.scss$/,
+            test: /\.less$/,
             use: [{
                 loader: "style-loader"
             }, {
                 loader: "css-loader"
             }, {
-                loader: "sass-loader"
+                loader: "less-loader"
             }]
         }, {
             test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,

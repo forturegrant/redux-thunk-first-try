@@ -4,6 +4,7 @@ import {Provider} from 'react-redux'
 import store from './configureStore'
 import App from './containers'
 
+
 render(
 	<Provider store={store}>
 		<App />
