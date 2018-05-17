@@ -1,12 +1,17 @@
-import  {BrowserRouter as Router ,IndexRoute} from 'react-router'
+import React from 'react'
+import { HashRouter as Router, Route, IndexRoute ,hashHistory} from 'react-router-dom'
+import App from './containers/index'
+import Login from './containers/login'
+import Register from './containers/register'
 
-export default () => {
-    <Router>
-        <Route path="/">
-            <IndexRoute component={welcome}></IndexRoute>
-        </Route>
-        <Route path="/login"></Route>
-        <Route path="/register"></Route>
+
+export default () =>(
+    <Router history={ hashHistory }>
+        <div>
+            {/*<IndexRoute component={welcome} >*/}
+            <Route exact path="/" component={App} />
+            <Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
+        </div>
     </Router>
-}
-
+)

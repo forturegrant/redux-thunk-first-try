@@ -1,15 +1,16 @@
 import React from 'react'
-import {render} from 'react-dom'
-import {Provider} from 'react-redux'
-import store from './configureStore'
-import App from './containers'
+import { render } from 'react-dom'
+import { Provider } from 'react-redux'
+import {store} from './store/configureStore'
+import Routes from './routes'
 
 
 render(
 	<Provider store={store}>
-		<App />
+		<Routes />
 	</Provider>,
-	document.getElementById('root'))
+	document.getElementById('root')
+)
 
 if(module.hot){
 	module.hot.accept();
