@@ -1,33 +1,24 @@
-import React,{ Component } from 'react'
-import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { Form , Row ,Col, Spin, Input ,Icon , Button} from 'antd'
-import {bindActionCreators} from 'redux'
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
+import {Form, Row, Col, Spin, Input, Icon, Button} from 'antd'
 
-import {register as registera} from '../../reducers/register.js'
+import {fetchRegister} from "../../actions/common";
 
-//const registera = { type : 'register' }
 const FormItem = Form.Item
 
 
-
-
-
-class registerForm extends Component{
-    constructor(props){
+class registerForm extends Component {
+    constructor(props) {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    /*handleChange = (e) =>{
-
-    }*/
-
-    handleSubmit(e){
+    handleSubmit(e) {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                this.props.registerR();
+                this.props.dispatch(fetchRegister(values))
                 /*this.props.dispatch(fetchRegister(values, (res) => {
                     // console.log(res)
                     message.success(res.msg)
@@ -50,9 +41,9 @@ class registerForm extends Component{
 
     }
 
-    render(){
-        const { getFieldDecorator } =this.props.form;
-        return(
+    render() {
+        const {getFieldDecorator} = this.props.form;
+        return (
             <div>
                 <div className="loginHeader">
                 </div>
@@ -66,13 +57,13 @@ class registerForm extends Component{
                                         <FormItem hasFeedback>
                                             {getFieldDecorator('username', {
                                                 rules: [
-                                                    { required: true, message: '请输入用户名' },
-                                                    { validator: this.checkName },
+                                                    {required: true, message: '请输入用户名'},
+                                                    {validator: this.checkName},
                                                     // { pattern: regExpConfig.IDcardTrim, message: '身份证号格式不正确' }
                                                 ],
                                                 // validateTrigger: 'onBlur',
                                             })(<Input
-                                                prefix={<Icon type="user" style={{ fontSize: 13 }} />}
+                                                prefix={<Icon type="user" style={{fontSize: 13}}/>}
                                                 placeholder="请输入用户名"
                                                 type="text"
                                             />)}
@@ -80,12 +71,12 @@ class registerForm extends Component{
                                         <FormItem hasFeedback>
                                             {getFieldDecorator('password', {
                                                 rules: [
-                                                    { required: true, message: '请输入密码' },
+                                                    {required: true, message: '请输入密码'},
                                                     // { pattern: regExpConfig.pwd, message: '密码只能是6-16个数字或者字母组成' }
                                                 ],
                                                 // validateTrigger: 'onBlur',
                                             })(<Input
-                                                prefix={<Icon type="lock" style={{ fontSize: 13 }} />}
+                                                prefix={<Icon type="lock" style={{fontSize: 13}}/>}
                                                 placeholder="请输入密码"
                                                 type="password"
                                             />)}
@@ -93,21 +84,21 @@ class registerForm extends Component{
                                         <FormItem hasFeedback>
                                             {getFieldDecorator('confirm', {
                                                 rules: [
-                                                    { required: true, message: '请输入密码' },
+                                                    {required: true, message: '请输入密码'},
                                                     // { pattern: regExpConfig.pwd, message: '密码只能是6-16个数字或者字母组成' }
-                                                    { validator: this.checkPassword },
+                                                    {validator: this.checkPassword},
                                                 ],
                                                 // validateTrigger: 'onBlur',
 
                                             })(<Input
-                                                prefix={<Icon type="lock" style={{ fontSize: 13 }} />}
+                                                prefix={<Icon type="lock" style={{fontSize: 13}}/>}
                                                 placeholder="请再次输入密码"
                                                 type="password"
                                             />,)}
                                         </FormItem>
                                         <FormItem hasFeedback>
-                                        <Button type="primary" htmlType="submit">确定注册</Button>
-                                        <Link to="/login">登录</Link>
+                                            <Button type="primary" htmlType="submit">确定注册</Button>
+                                            <Link to="/login">登录</Link>
                                         </FormItem>
                                     </Form>
                                 </Spin>
@@ -127,14 +118,12 @@ const register = Form.create({
     }
 })(registerForm);
 
-const mapStateToProps = (state) =>({
-    loading:state.loading
+const mapStateToProps = (state) => ({
+    loading: state.loading
 })
 
-const mapDispatchToProps = (dispatch) =>({
-    registerR: () => dispatch({
-        type:'register'
-    })
+const mapDispatchToProps = (dispatch) => ({
+    registerR: () => dispatch(registera())
 })
 
 export default connect(

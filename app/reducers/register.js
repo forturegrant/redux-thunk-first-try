@@ -8,6 +8,8 @@ export function register(text){
     }
 }
 
+
+
 export function registerR (state = initialState, action) {
     switch (action.type){
         case "register":
