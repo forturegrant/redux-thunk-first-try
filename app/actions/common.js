@@ -1,9 +1,11 @@
 import axios from 'axios'
+import { prefix, suffix, timeout } from '../config'
+
 
 // axios配置
 const axiosBaseConfig = {
-    // baseURL: prefix,
-    timeout: 6000,
+    baseURL: 'localhost:1112',
+    timeout: timeout,
     headers: {'Content-Type': 'text/plain'},
     method: 'post',
     // 跨域请求，是否带上认证信息
@@ -61,7 +63,8 @@ export const fetchLogin = createAjaxAction(login)
 export const fetchRegister = createAjaxAction(register)
 export const userInfo = createAjaxAction(userInfo)*/
 
-export const fetchRegister = (values) => {
-    axios.post('/register', values).then(() => dispatch({type: 'register'})).catch((err) => console.log(err))
-}
+axios.defaults.baseURL = 'http://localhost:1112';
+
+export const fetchRegister = (values,cal) => (dispatch,getState,cal) => axios.post('/register', values).then((res) => cal())
+
 

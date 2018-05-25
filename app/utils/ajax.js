@@ -4,7 +4,7 @@ import { prefix, suffix, timeout } from '../config'
 
 // axios配置
 const axiosBaseConfig = {
-  // baseURL: prefix,
+  baseURL: prefix,
   timeout: timeout,
   headers: { 'Content-Type': 'text/plain' },
   method: 'post',
@@ -43,6 +43,7 @@ const axiosBaseConfig = {
 }
 // axios 实例
 const axiosInstance = axios.create(axiosBaseConfig)
+
 // 拦截器
 axiosInstance.interceptors.request.use(req => req, error =>
   // 当请求错误时

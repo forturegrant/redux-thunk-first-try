@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {Form, Row, Col, Spin, Input, Icon, Button} from 'antd'
+import {Form, Row, Col, Spin, Input, Icon, Button, message} from 'antd'
 
 import {fetchRegister} from "../../actions/common";
 
@@ -18,6 +18,9 @@ class registerForm extends Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
+                function cal(){
+                    console.log(1)
+                }
                 this.props.dispatch(fetchRegister(values))
                 /*this.props.dispatch(fetchRegister(values, (res) => {
                     // console.log(res)
@@ -123,7 +126,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    registerR: () => dispatch(registera())
+    dispatch: dispatch
 })
 
 export default connect(
