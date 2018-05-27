@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { prefix, suffix, timeout } from '../config'
+import {prefix, suffix, timeout} from '../config'
 
 
 // axios配置
@@ -65,6 +65,11 @@ export const userInfo = createAjaxAction(userInfo)*/
 
 axios.defaults.baseURL = 'http://localhost:1112';
 
-export const fetchRegister = (values,cal) => (dispatch,getState,cal) => axios.post('/register', values).then((res) => cal())
-
+export const fetchRegister = (startAction, values, cal, endAction) => (dispatch) => {
+    startAction && dispatch(startAction());
+    axios.post('/register', values).then((res) => {
+        cal && cal(res);
+        endAction && dispatch(endAction());
+    })
+}
 

@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom'
 import {Form, Row, Col, Spin, Input, Icon, Button, message} from 'antd'
 
 import {fetchRegister} from "../../actions/common";
+import {startRegister,endRegister} from '../../reducers/register'
 
 const FormItem = Form.Item
 
@@ -18,10 +19,10 @@ class registerForm extends Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                function cal(){
-                    console.log(1)
-                }
-                this.props.dispatch(fetchRegister(values))
+                this.props.dispatch(fetchRegister(startRegister, values, (res) => {
+                    message.success(res.msg)
+                },endRegister))
+
                 /*this.props.dispatch(fetchRegister(values, (res) => {
                     // console.log(res)
                     message.success(res.msg)

@@ -2,19 +2,29 @@ const initialState = {
      loading : false
 }
 
-export function register(text){
+export function startRegister(text){
     return {
-        type: 'register'
+        type: 'startRegister'
+    }
+}
+
+export function endRegister(text){
+    return {
+        type: 'endRegister'
     }
 }
 
 
-
 export function registerR (state = initialState, action) {
     switch (action.type){
-        case "register":
+        case "startRegister":
             return {
                 loading:true
+            }
+            break;
+        case "endRegister":
+            return {
+                loading:false
             }
             break;
         default:
